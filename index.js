@@ -39,10 +39,14 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 //				let reply = event.message.text.replace(/いかれ/g, "カレー") + "ということですか？";
 			let replymessage = "";
 			mecab.parseFormat(event.message.text, function(err, morphs) {
-				if (err) throw err;
-				morphs.map(function(morph) {
-					replymessage += morph.pronunciation;
-				});
+				if (err) {
+					cosole.log("err at parseFormat");
+//					throw err;
+				} else {
+					morphs.map(function(morph) {
+						replymessage += morph.pronunciation;
+					});
+				}
 			});
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
