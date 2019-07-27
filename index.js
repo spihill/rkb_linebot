@@ -38,6 +38,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
 		if (event.type === "message" && event.message.type === "text"){
 			let morphs = mecab.parseSync(event.message.text);
+			let replymessage = new String();
 			morphs.map(function(morph) {
 				replymessage += morph[8];
 			});
