@@ -41,6 +41,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 			console.log(event.message.text);
 			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
+					console.log("err at mecab.parse");
 					throw err;
 				} else {
 					morphs.map(function(morph) {
@@ -49,7 +50,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 					});
 				}
 			});
-//			console.log(replymessage);
+			console.log(replymessage);
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
 				text: replymessage
