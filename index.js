@@ -2,7 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const mecab = new require("mecab-asynx");
+const mecab = new require("mecab-async");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -29,7 +29,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 	// すべてのイベント処理のプロミスを格納する配列。
 	let events_processed = [];
 
-	mecab.command = "mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd";
+	mecab.command = "mecab -d /app/.linuxbrew/lib/mecab/dic/mecab-ipadic-neologd";
 
 	// イベントオブジェクトを順次処理。
 	req.body.events.forEach((event) => {
