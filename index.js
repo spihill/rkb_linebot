@@ -4,6 +4,8 @@ const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
 let MeCab = new require("mecab-async");
 let mecab = new MeCab();
+MeCab.command = "mecab -d /app/.linuxbrew/lib/mecab/dic/mecab-ipadic-neologd";
+
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -30,7 +32,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 	// すべてのイベント処理のプロミスを格納する配列。
 	let events_processed = [];
 
-	mecab.command = "mecab -d /app/.linuxbrew/lib/mecab/dic/mecab-ipadic-neologd";
 
 	// イベントオブジェクトを順次処理。
 	req.body.events.forEach((event) => {
@@ -38,7 +39,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		if (event.type === "message" && event.message.type === "text"){
 			let replymessage = "hello";
 			console.log(event.message.text);
-			mecab.parse("カレー" /*event.message.text*/, function(err, morphs) {
+			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
 					throw err;
 				} else {
