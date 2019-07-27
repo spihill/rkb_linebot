@@ -45,11 +45,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 				} else {
 					morphs.map(function(morph) {
 						replymessage += morph[8];
-						console.log(morph[8]);
+						console.log(replymessage);
 					});
 				}
 			});
-			console.log(replymessage);
+//			console.log(replymessage);
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
 				text: replymessage
