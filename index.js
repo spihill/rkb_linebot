@@ -39,7 +39,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		if (event.type === "message" && event.message.type === "text"){
 			var replymessage = new String("test");
 			console.log(event.message.text);
-			mecab.parse(event.message.text, function(err, morphs) {
+			mecab.parseSync(event.message.text, function(err, morphs) {
 				if (err) {
 					console.log("err at mecab.parse");
 					throw err;
