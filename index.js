@@ -43,7 +43,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 				replymessage += morph[8];
 			});
 			if (replymessage.indexOf("イカレ") >= 0) {
-				replymessage = event.message.text.replace(/イカレ/g, "カレー") + "ということですか？";
+				replymessage = replymessage.replace(/イカレ/g, "カレー") + "ということですか？";
 				events_processed.push(bot.replyMessage(event.replyToken, {
 					type: "text",
 					text: replymessage
