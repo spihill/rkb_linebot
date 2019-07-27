@@ -2,7 +2,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const mecab = new require("mecab-async");
+let MeCab = new require("mecab-async");
+let mecab = new MeCab();
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -38,16 +39,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 //			if (event.message.text.indexOf("いかれ") >= 0) {
 //				let reply = event.message.text.replace(/いかれ/g, "カレー") + "ということですか？";
 			let replymessage = "hello";
-//			mecab.parseFormat(event.message.text, function(err, morphs) {
-//				if (err) {
-//					cosole.log("err at parseFormat");
-////					throw err;
-//				} else {
-//					morphs.map(function(morph) {
-//						replymessage += morph.pronunciation;
-//					});
-//				}
-//			});
+			mecab.parse(event.message.text, function(err, morphs) {
+				if (err) {
+					cosole.log("err at parseFormat");
+//					throw err;
+				} else {
+					morphs.map(function(morph) {
+						replymessage += morph.pronunciation;
+					});
+				}
+			});
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
 				text: replymessage
