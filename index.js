@@ -39,6 +39,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 //			if (event.message.text.indexOf("いかれ") >= 0) {
 //				let reply = event.message.text.replace(/いかれ/g, "カレー") + "ということですか？";
 			let replymessage = "hello";
+			console.log(event.message.text);
 			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
 //					throw err;
