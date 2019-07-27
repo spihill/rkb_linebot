@@ -39,23 +39,16 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		if (event.type === "message" && event.message.type === "text"){
 			var replymessage = new String("test");
 			console.log(event.message.text);
-			mecab.parseSync(event.message.text, function(err, morphs) {
-				if (err) {
-					console.log("err at mecab.parse");
-					throw err;
-				} else {
-					morphs.map(function(morph) {
-						replymessage += morph[8];
-						console.log(replymessage);
-					});
-				}
-			});
+			let morphs = mecab.parseSync(event.message.text);
+			morphs.map(function(morph) {
+				replymessage += morph[8];
+				console.log(replymessage);
+			}
 			console.log(replymessage);
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
 				text: replymessage
 			}));
-			
 		}
 	});
 
