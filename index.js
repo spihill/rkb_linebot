@@ -37,7 +37,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 	req.body.events.forEach((event) => {
 		// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
 		if (event.type === "message" && event.message.type === "text"){
-			let replymessage = "hello";
+			var replymessage = new String();
 			console.log(event.message.text);
 			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
