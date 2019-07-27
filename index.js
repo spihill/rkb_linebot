@@ -37,17 +37,17 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		if (event.type === "message" && event.message.type === "text"){
 //			if (event.message.text.indexOf("いかれ") >= 0) {
 //				let reply = event.message.text.replace(/いかれ/g, "カレー") + "ということですか？";
-			let replymessage = "";
-			mecab.parseFormat(event.message.text, function(err, morphs) {
-				if (err) {
-					cosole.log("err at parseFormat");
-//					throw err;
-				} else {
-					morphs.map(function(morph) {
-						replymessage += morph.pronunciation;
-					});
-				}
-			});
+			let replymessage = "hello";
+//			mecab.parseFormat(event.message.text, function(err, morphs) {
+//				if (err) {
+//					cosole.log("err at parseFormat");
+////					throw err;
+//				} else {
+//					morphs.map(function(morph) {
+//						replymessage += morph.pronunciation;
+//					});
+//				}
+//			});
 			events_processed.push(bot.replyMessage(event.replyToken, {
 				type: "text",
 				text: replymessage
