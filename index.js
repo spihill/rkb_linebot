@@ -43,10 +43,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 				if (err) {
 					throw err;
 				} else {
-					morphs.map(function(morph) {
-						replymessage += morph.pronunciation;
-						console.log(morph.pronunciation);
-					});
+//					morphs.map(function(morph) {
+//						replymessage += morph.pronunciation;
+//						console.log(morph.pronunciation);
+//					});
+					console.log(morphs);
 				}
 			});
 			events_processed.push(bot.replyMessage(event.replyToken, {
