@@ -42,7 +42,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 			console.log(event.message.text);
 			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
-//					throw err;
+					throw err;
 				} else {
 					morphs.map(function(morph) {
 						replymessage += morph.pronunciation;
