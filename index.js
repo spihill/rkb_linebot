@@ -40,7 +40,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 			let morphs = mecab.parseSync(event.message.text);
 			let replymessage = new String();
 			morphs.map(function(morph) {
-				replymessage += morph[8];
+				if (morph[8] == undefined) {
+					replymessage += morph[0];
+				} else {
+					replymessage += morph[8];
+				}
 			});
 			if (replymessage.indexOf("イカレ") >= 0) {
 				replymessage = replymessage.replace(/イカレ/g, "カレー") + "ということですか？";
