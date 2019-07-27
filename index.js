@@ -41,11 +41,11 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 			let replymessage = "hello";
 			mecab.parse(event.message.text, function(err, morphs) {
 				if (err) {
-					cosole.log("err at parseFormat");
 //					throw err;
 				} else {
 					morphs.map(function(morph) {
 						replymessage += morph.pronunciation;
+						console.log(morph.pronunciation);
 					});
 				}
 			});
