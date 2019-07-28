@@ -63,3 +63,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		}
 	);
 });
+
+server.get('/', (req, res) => {
+	res.send('Running');
+	res.sendStatus(200);
+});
