@@ -38,20 +38,20 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 		// この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
 		if (event.type === "message" && event.message.type === "text"){
 			let morphs = mecab.parseSync(event.message.text);
-			let replymessage = new String();
+			let replytext = new String();
 			morphs.map(function(morph) {
 				if (morph[8] == undefined) {
-					if (morph[1] == undefined) replymessage += '\n';
-					else replymessage += morph[0];
+					if (morph[1] == undefined) replytext += '\n';
+					else replytext += morph[0];
 				} else {
-					replymessage += morph[8];
+					replytext += morph[8];
 				}
 			});
-			if (replymessage.indexOf("イカレ") >= 0) {
-				replymessage = replymessage.replace(/イカレ/g, "カレー") + "ということですか？";
-				events_processed.push(bot.replyMessage(event.replyToken, {
+			if (replytext.indexOf("イカレ") >= 0) {
+				replytext = replytext.replace(/イカレ/g, "カレー") + "ということですか？";
+				events_processed.push(bot.replytext(event.replyToken, {
 					type: "text",
-					text: replymessage
+					text: replytext
 				}));
 			}
 		}
