@@ -41,8 +41,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 			let replymessage = new String();
 			morphs.map(function(morph) {
 				if (morph[8] == undefined) {
-					if (morph[0] != 'EOS') replymessage += morph[0];
-					else replymessage += '\n';
+					if (morph[1] == undefined) replymessage += '\n';
+					else replymessage += morph[0];
 				} else {
 					replymessage += morph[8];
 				}
